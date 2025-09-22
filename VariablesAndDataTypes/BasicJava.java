@@ -28,7 +28,7 @@ public class BasicJava {
         System.out.println( "str = " + str );
 
 
-        //Problem
+        //Problem for class one java
 
         String name = "Rushikesh";
         int age = 21;
