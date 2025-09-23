@@ -1,4 +1,4 @@
-package DSA.Arrays.contorl_flow_statements;
+package DSA.Arrays.control_flow_statements;
 
 public class MaximumElement {
     public static void main(String[] args) {

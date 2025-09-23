@@ -1,4 +1,4 @@
-package DSA.Arrays.Variables;
+package DSA.Arrays.VariablesAndDataTypes;
 
 public class VariableDemo1
 {
