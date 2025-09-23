@@ -4,6 +4,9 @@ public class VariableDemo1
 {
 public static void main(String[] args)
 {
+    //Variables : Variable is a conainer in which we hold the data.
+    // It is a Name Given to the Memory location where data is Stored
+    //Syntax : data_type variable_name = value;
     byte age = 21;
     short Recharge = 299;
     int Marks = 450;
