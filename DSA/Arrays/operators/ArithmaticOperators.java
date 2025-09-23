@@ -11,6 +11,5 @@ public class ArithmaticOperators {
         float div = a/b;
         System.out.println("Division of "+a+" and "+b+" is "+div);//Division
         System.out.println("Modulas of "+a+" and "+b+" is "+(a%b));
-
     }
 }
