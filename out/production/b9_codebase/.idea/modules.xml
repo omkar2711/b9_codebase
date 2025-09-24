@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/Batch9.iml" filepath="$PROJECT_DIR$/Batch9.iml" />
-=======
       <module fileurl="file://$PROJECT_DIR$/b9_codebase.iml" filepath="$PROJECT_DIR$/b9_codebase.iml" />
->>>>>>> 849543453374ed91a97ac8ae6be6d9e1e5d9963e
     </modules>
   </component>
 </project>
