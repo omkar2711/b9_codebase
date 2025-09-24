@@ -2,41 +2,48 @@ package VariablesAndDataTypes;
 
 public class BasicJava {
     public static void main(String[] args) {
-        //Data Types
-        //Primitive
-        //int
-        int a = 10;
 
-        //double
-        double price = 30.40;
-
-        //Char
-        char ch = 'A';
-
-        //boolean
-        boolean b = true;
-
-        //Reference Data Type
-        //String
-
-        String str = "Hello";
-
-        System.out.println( "a = "  +  a );
-        System.out.println("price = " + price );
-        System.out.println("ch = " + ch );
-        System.out.println( "b = " + b);
-        System.out.println( "str = " + str );
+        //Integers
+        byte a = 20;    //-128 to 127
+        short b = 30;   // -32,768 to 32767
+        int c = 40;     // -2x10^9 to 2x10^9 (-2147483648 to 2147483647)
+        long d = 50;    // -9x10^18 to 9x10^18
 
 
-        //Problem for class one java
+        //Floating Point
+        float e = 60;
 
-        String name = "Rushikesh";
-        int age = 21;
-        char grade = 'A';
 
-        System.out.println( "name = " + name );
-        System.out.println( "age = " + age );
-        System.out.println( "grade = " + grade );
+
+        //Operators and Expression:
+
+        //2. Assignment operator
+            // =, -= ,+= ,*= , /= , %=
+            int num = 10;
+            num += 5; //num = num + 5;
+
+        //3. Relational(Comparision) Operator
+            // ==, != , >, < , >=, <=
+
+        // a == b -> true,false
+
+        //4. Logical Operator
+            //&&(AND), ||(OR), !(NOT)
+
+            // a==b && b == 6
+            // (6 == 6 && 6 == 6 && !true)
+
+        //5. Unary Operator
+        // ++, --, +, -, !
+
+        int t  = 5;
+        int y = 6;
+
+
+
+
+
+
 
 
 
