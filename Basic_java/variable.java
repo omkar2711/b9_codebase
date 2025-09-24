@@ -2,6 +2,8 @@ package Basic_java;
 
 public class variable {
     public static void main(String[] args) {
+
+       //Problem:  
        String name = "Rushikesh";
        int age = 21;
        char grade = 'A';
