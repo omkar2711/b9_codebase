@@ -1,4 +1,4 @@
-package Basic_java;
+package Operators1;
 
 public class variable {
     public static void main(String[] args) {
