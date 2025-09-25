@@ -14,5 +14,6 @@ public class AmountDemo {
 
         System.out.println("500  notes is "+NotesOf500);
         System.out.println("100  notes is "+NotesOf100);
+        sc.close();
     }
 }
