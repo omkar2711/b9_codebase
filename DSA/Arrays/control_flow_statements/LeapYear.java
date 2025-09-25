@@ -8,7 +8,7 @@ public class LeapYear {
         System.out.println("Enter the Year to Check weather it is Leap Year or not :-");
         int Year = sc.nextInt();
 
-        if(Year%4 == 0 || Year%100 == 0)
+        if(Year%4 == 0 || Year%400 == 0)
         {
             System.out.println(Year+ " is Leap Year");
         }
