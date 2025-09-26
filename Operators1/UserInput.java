@@ -13,9 +13,9 @@ public class UserInput {
          * System.out.println("Enter the hobby: ");
          * String hobby = sc.nextLine();
          * 
-         * System.out.println("My name is "+name+ " and my hobby is "+hobby);
-         * sc.close();
-         */
+         * System.out.println("My name is "+name+ " and my hobby is "+hobby); */
+        sc.close();
+         
 
         // Write a java program to swap the values of two variables with using a
         // temporary variable.

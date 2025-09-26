@@ -1,4 +1,4 @@
-package ControlFlowStatement.ifElse;
+package ControlFlowStatement2.ifElse;
 import java.util.*;
 
 public class guessTemperature {
@@ -19,5 +19,6 @@ public class guessTemperature {
             System.out.println("The temperature is very hot.");
         } 
         
+        sc.close();
     }
 }

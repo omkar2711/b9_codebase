@@ -1,4 +1,4 @@
-package ControlFlowStatement.ifElse;
+package ControlFlowStatement2.ifElse;
 import java.util.Scanner;
 
 public class NegativePositive {
@@ -16,6 +16,8 @@ public class NegativePositive {
         } else {
             System.out.println("The number is Positive.");
         }
+
+        sc.close();
     }
     
 }

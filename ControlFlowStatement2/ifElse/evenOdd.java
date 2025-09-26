@@ -1,4 +1,4 @@
-package ControlFlowStatement.ifElse;
+package ControlFlowStatement2.ifElse;
 import java.util.Scanner;
 
 public class evenOdd {
@@ -14,6 +14,8 @@ public class evenOdd {
         } else {
             System.out.println("The number is Odd.");
         }
+
+        sc.close();
     }
     
 }

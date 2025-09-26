@@ -1,4 +1,4 @@
-package ControlFlowStatement.ifElse;
+package ControlFlowStatement2.ifElse;
 
 import java.util.Scanner;
 
@@ -20,5 +20,7 @@ public class LargerNumber {
         } else {
             System.out.println("The first number is less than second number: "+num1+ "<" +num2);
         }
+
+        sc.close();
     }
 }

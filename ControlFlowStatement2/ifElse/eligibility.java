@@ -1,4 +1,4 @@
-package ControlFlowStatement.ifElse;
+package ControlFlowStatement2.ifElse;
 
 import java.util.Scanner;
 
@@ -16,5 +16,6 @@ public class eligibility {
             System.out.println("Your are not eligible for vote.");
         }
 
+        sc.close();
     }
 }
