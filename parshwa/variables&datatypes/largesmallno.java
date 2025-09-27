@@ -1,4 +1,4 @@
-
+//check two no from user and print larget one
 import java.util.Scanner;
 
 public class largesmallno {

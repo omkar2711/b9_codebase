@@ -11,6 +11,7 @@ public class notes {
         if(amount % 100==0){
             int count500=amount/500;
             amount=amount-count500*500;
+            count500=amount/100;
             
 
         }

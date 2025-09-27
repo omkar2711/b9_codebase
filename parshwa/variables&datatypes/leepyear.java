@@ -1,4 +1,4 @@
-
+// take year as input from user and check whether a year is leep or not 
 import java.util.Scanner;
 
 public class leepyear {

@@ -1,4 +1,4 @@
-
+// write a no as input and check the no is possitive negative or zero
 import java.util.Scanner;
 
 public class posinigative {

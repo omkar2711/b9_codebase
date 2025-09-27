@@ -1,4 +1,4 @@
-
+//write java program to check no is even or odd
 import java.util.Scanner;
 
 public class evenodd {
