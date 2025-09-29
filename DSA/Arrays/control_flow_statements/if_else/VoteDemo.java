@@ -1,4 +1,4 @@
-package DSA.Arrays.control_flow_statements;
+package DSA.Arrays.control_flow_statements.if_else;
 
 import java.util.Scanner;
 
