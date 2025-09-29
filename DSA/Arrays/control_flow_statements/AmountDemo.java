@@ -1,7 +1,5 @@
-package DSA.Arrays.control_flow_statements;
-
+﻿package DSA.Arrays.control_flow_statements;
 import java.util.Scanner;
-
 public class AmountDemo {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
