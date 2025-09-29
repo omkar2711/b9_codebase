@@ -9,9 +9,16 @@ public class AmountDemo {
         int NotesOf500 = amt/500;
         int Remaining_amt = amt % 500;
         int NotesOf100 = Remaining_amt/100;
+        int NotesOf10 = Remaining_amt/10;
+        int CoinsOf5 = Remaining_amt/5;
+        int CoinsOf2 = Remaining_amt/2;;
 
-        System.out.println("500  notes is "+NotesOf500);
-        System.out.println("100  notes is "+NotesOf100);
+
+        System.out.println("Coins  of 2 Rs is "+CoinsOf2);
+        System.out.println("Coins of 5 Rs "+CoinsOf5);
+        System.out.println("notes of 10 Rs is "+NotesOf10);
+        System.out.println("notes of 100 Rs is "+NotesOf100);
+        System.out.println("notes of 500 Rs is "+NotesOf500);
         sc.close();
     }
 }
