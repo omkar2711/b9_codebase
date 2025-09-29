@@ -1,4 +1,4 @@
-package DSA.Arrays.control_flow_statements.Loops;
+package DSA.Arrays.control_flow_statements.forLoop;
 
 import java.util.Scanner;
 

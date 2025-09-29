@@ -1,18 +1,17 @@
-package DSA.Arrays.control_flow_statements.Loops;
+package DSA.Arrays.control_flow_statements.whileLoops;
 
 import java.util.Scanner;
 
-public class NumberDivisibleBy {
+public class NaturalNumbers {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a last number: ");
+        System.out.println("Enter a number: ");
         int n = sc.nextInt();
-        for(int i =1;i<=n;i++)
-        {
-        if(i%5==0 && i%7==0)
+        int i =1;
+        while(i<=n)
         {
             System.out.println(i);
-        }
+            i++;
         }
         sc.close();
     }
