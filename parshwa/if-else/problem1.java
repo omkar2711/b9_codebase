@@ -1,4 +1,4 @@
-
+// take tempreture as input and check the tempreture is Freeze cold or hot
 import java.util.Scanner;
 
 public class problem1 {

@@ -1,4 +1,4 @@
-
+// take age as input and check user is eligible for vote
 import java.util.Scanner;
 
 public class vote {

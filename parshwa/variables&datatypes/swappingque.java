@@ -1,5 +1,4 @@
-
-
+// swapping of two no
 public class swappingque {
     public static void main(String[] args) {
         int a=10;

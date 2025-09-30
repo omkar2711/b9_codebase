@@ -1,3 +1,4 @@
+// take principla amount rate of interest  and duration in year  and calculate simple interest
 import java.util.Scanner;
 
 public class simpleint {

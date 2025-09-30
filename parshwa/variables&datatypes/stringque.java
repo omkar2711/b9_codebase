@@ -1,4 +1,4 @@
-
+// take name and hobby as input and print it
 import java.util.Scanner;
 
 public class stringque {
