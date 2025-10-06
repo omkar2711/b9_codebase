@@ -1,4 +1,4 @@
-package javaBasics.controlFlowConditionalStatments;
+package javaBasics.controlFlow;
 
 import java.util.Scanner;
 
@@ -17,6 +17,11 @@ public class leapYear {
             System.out.println(Year+ " is Not Leap Year");
         }
 
+
+        sc.close();
+        
+
     }
+    
     
 }

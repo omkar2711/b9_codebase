@@ -1,4 +1,4 @@
-package javaBasics.controlFlowConditionalStatments;
+package javaBasics.controlFlow;
 import java.util.*;
 
 public class problem3 {

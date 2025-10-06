@@ -11,6 +11,10 @@ public class squareNumber {
        int sq=a*a;
 
        System.out.println("The square of\t"+a+" is :-->"+sq);
+
+       SC.close();
     }
+    
+
     
 }
