@@ -1,6 +1,7 @@
 package OOPS;
 
 class Car{
+
     //Attributes
     String Brand;
     String Model;
@@ -37,6 +38,9 @@ class Car{
 
 
 public class program1 {
+
+
+    protected String name;
     public static void main(String[] args) {
         //Objects
 

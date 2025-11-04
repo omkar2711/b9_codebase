@@ -31,7 +31,7 @@ public class methodsExample {
         
         Calculator c = new Calculator();
         // int[] result = c.addition(10,5); //Arguments
-        System.out.println(c.division(10, 0));
+        // System.out.println(c.division(10, 0));
         System.out.println();
 
     }
