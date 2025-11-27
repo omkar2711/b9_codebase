@@ -2,7 +2,7 @@ package OOPS;
 
 
 class Shape{ //Super Class
-    String color;
+    // String color;
     int height;
     int width;
 

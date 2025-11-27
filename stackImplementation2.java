@@ -12,7 +12,7 @@ class Node{
 }
 
 class Stack{
-     Node head;
+    Node head;
     Node top;
    
 
