@@ -23,7 +23,7 @@ class Queue1 {
             System.out.println(data+" Added to the Queue");
             return;
         }
-       rear.next = newNode;
+        rear.next = newNode;
         rear = rear.next;
         System.out.println(data+" Added to the Queue");
     }
