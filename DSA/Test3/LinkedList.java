@@ -1,4 +1,4 @@
-package DSA.LinearDataStructure.Test3;
+package DSA.Test3;
 //Q21. Linked List Coding
 //Write a function to insert a new node at the end of a singly linked list.
 

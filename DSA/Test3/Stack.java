@@ -1,12 +1,10 @@
-package DSA.LinearDataStructure.Test3;
+package DSA.Test3;
 //Q20. Stack Problem
 //Implement a stack using an array with the following operations:
 //•	push()
 //•	pop()
 //•	peek()
 //•	isEmpty()
-
-import java.util.Arrays;
 
 public class Stack {
     int capacity = 1001;

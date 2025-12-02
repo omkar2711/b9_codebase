@@ -1,4 +1,4 @@
-package DSA.LinearDataStructure.Test3;
+package DSA.Test3;
 import java.util.Stack;
 //Q22. Queue Coding
 //Implement a queue using two stacks. The queue should support:
