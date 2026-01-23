@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CareerHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* About Page Specific Styles */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 140px 20px 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .about-section {
+            padding: 80px 20px;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+        
+        .about-image i {
+            font-size: 10rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            background: var(--bg-white);
+            padding: 80px 20px;
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .mission-card {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: var(--radius-lg);
+            background: var(--bg-light);
+            transition: var(--transition);
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            background: var(--bg-white);
+        }
+        
+        .mission-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+        
+        .mission-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .mission-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .mission-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* Team Section */
+        .team-section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .team-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .team-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        
+        .team-card .role {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .team-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        
+        .team-social a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Values Section */
+        .values-section {
+            background: var(--bg-white);
+            padding: 80px 20px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .value-card {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+        }
+        
+        .value-card:hover {
+            background: var(--bg-white);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .value-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .value-content h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .value-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* Stats Section */
+        .about-stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .about-stats .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .about-stat h3 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .about-stat p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-buttons .btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+                min-height: 250px;
+            }
+            
+            .about-image i {
+                font-size: 6rem;
+            }
+            
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-stats .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <span>CareerHub</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Find Jobs</a>
+                <a href="companies.html">Companies</a>
+                <a href="resources.html">Resources</a>
+                <a href="about.html" class="active">About</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>About CareerHub</h1>
+        <p>Connecting talented professionals with amazing opportunities since 2020</p>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>CareerHub was founded with a simple mission: to make job searching easier, faster, and more effective for everyone. We believe that finding the right job shouldn't be a frustrating experience.</p>
+                    <p>Our platform leverages cutting-edge technology to connect job seekers with opportunities that match their skills, experience, and career goals. We partner with thousands of companies worldwide to bring you the best job listings across all industries.</p>
+                    <p>Whether you're a recent graduate looking for your first job or an experienced professional seeking new challenges, CareerHub is here to help you take the next step in your career journey.</p>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Mission</h2>
+                <p>We're on a mission to transform how people find jobs and how companies find talent</p>
+            </div>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To become the world's most trusted career platform where every professional can find their dream job and every company can find the perfect talent.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To empower professionals and companies by providing an intuitive, efficient, and reliable platform for job searching and recruitment.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Our Promise</h3>
+                    <p>We promise to continuously innovate, listen to our users, and provide the best possible experience for both job seekers and employers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="about-stats">
+        <div class="container">
+            <div class="about-stat">
+                <h3>10M+</h3>
+                <p>Registered Users</p>
+            </div>
+            <div class="about-stat">
+                <h3>50K+</h3>
+                <p>Partner Companies</p>
+            </div>
+            <div class="about-stat">
+                <h3>100+</h3>
+                <p>Countries Served</p>
+            </div>
+            <div class="about-stat">
+                <h3>5M+</h3>
+                <p>Successful Placements</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+                <p>The principles that guide everything we do</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="value-content">
+                        <h4>Integrity</h4>
+                        <p>We are transparent, honest, and ethical in all our dealings. We verify all job listings and protect our users from scams.</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="value-content">
+                        <h4>Innovation</h4>
+                        <p>We constantly push boundaries to improve our platform with the latest technology and user-centric design.</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="value-content">
+                        <h4>Community</h4>
+                        <p>We believe in building a supportive community where professionals can grow, learn, and connect.</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="value-content">
+                        <h4>Inclusivity</h4>
+                        <p>We are committed to creating equal opportunities for all, regardless of background, gender, or location.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Leadership Team</h2>
+                <p>The passionate people behind CareerHub</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">SJ</div>
+                    <h4>Sarah Johnson</h4>
+                    <p class="role">CEO & Co-Founder</p>
+                    <p>Former HR executive with 15+ years of experience in talent acquisition.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">MC</div>
+                    <h4>Michael Chen</h4>
+                    <p class="role">CTO & Co-Founder</p>
+                    <p>Tech visionary who previously led engineering teams at major tech companies.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">EP</div>
+                    <h4>Emily Parker</h4>
+                    <p class="role">Head of Product</p>
+                    <p>Product expert focused on creating intuitive user experiences.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">DW</div>
+                    <h4>David Wilson</h4>
+                    <p class="role">VP of Operations</p>
+                    <p>Operations leader ensuring smooth platform performance globally.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Find Your Dream Job?</h2>
+            <p>Join millions of professionals who have found their perfect career match through CareerHub.</p>
+            <div class="cta-buttons">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search Jobs
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <i class="fas fa-building"></i> For Employers
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-briefcase"></i>
+                        <span>CareerHub</span>
+                    </div>
+                    <p>Your gateway to finding the perfect career opportunity</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>For Job Seekers</h4>
+                    <ul>
+                        <li><a href="index.html">Browse Jobs</a></li>
+                        <li><a href="resources.html">Career Advice</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Salary Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Candidates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Recruitment Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@careerhub.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CareerHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

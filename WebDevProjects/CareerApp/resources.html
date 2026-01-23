@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Resources - CareerHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Resources Page Specific Styles */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 140px 20px 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        
+        .category-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .category-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .category-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .category-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Articles Section */
+        .articles-section {
+            background: var(--bg-white);
+            padding: 80px 20px;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .article-card {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .article-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .article-image i {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .article-content {
+            padding: 25px;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            font-size: 0.85rem;
+            color: var(--text-lighter);
+        }
+        
+        .article-meta span i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .article-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .article-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .article-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            gap: 12px;
+        }
+        
+        /* Tools Section */
+        .tools-section {
+            padding: 80px 20px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .tool-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tool-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .tool-header h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+        }
+        
+        .tool-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .tool-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .tool-features li {
+            padding: 8px 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tool-features li i {
+            color: var(--secondary-color);
+        }
+        
+        .btn-tool {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-tool:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Tips Section */
+        .tips-section {
+            background: var(--bg-white);
+            padding: 80px 20px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .tip-card {
+            display: flex;
+            gap: 25px;
+            padding: 30px;
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+        }
+        
+        .tip-card:hover {
+            background: var(--bg-white);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .tip-number {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .tip-content h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .tip-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .newsletter-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-section p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: var(--radius-xl);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            padding: 15px 30px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form button:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 20px;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            text-align: left;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+            color: var(--primary-color);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+        
+        .faq-answer p {
+            padding: 0 25px 20px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 1024px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <span>CareerHub</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Find Jobs</a>
+                <a href="companies.html">Companies</a>
+                <a href="resources.html" class="active">Resources</a>
+                <a href="about.html">About</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Career Resources</h1>
+        <p>Expert advice, tools, and insights to accelerate your career growth</p>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore by Category</h2>
+                <p>Find resources tailored to your career needs</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Resume Writing</h3>
+                    <p>Tips and templates for creating standout resumes</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Interview Prep</h3>
+                    <p>Ace your interviews with expert guidance</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Career Growth</h3>
+                    <p>Strategies for advancing your career</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Salary Insights</h3>
+                    <p>Know your worth with salary data</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="articles-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Articles</h2>
+                <p>Stay updated with the latest career trends and advice</p>
+            </div>
+            <div class="articles-grid">
+                <article class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Resume</span>
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                        </div>
+                        <h3>10 Resume Mistakes That Are Costing You Job Interviews</h3>
+                        <p>Learn the common pitfalls that make recruiters skip your resume and how to fix them.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Interview</span>
+                            <span><i class="fas fa-clock"></i> 8 min read</span>
+                        </div>
+                        <h3>How to Ace Your Virtual Interview in 2026</h3>
+                        <p>Master the art of virtual interviews with these proven tips and techniques.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Negotiation</span>
+                            <span><i class="fas fa-clock"></i> 6 min read</span>
+                        </div>
+                        <h3>Salary Negotiation: Get Paid What You Deserve</h3>
+                        <p>Expert strategies for negotiating a better salary and benefits package.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Tech</span>
+                            <span><i class="fas fa-clock"></i> 7 min read</span>
+                        </div>
+                        <h3>Top Tech Skills Employers Are Looking For</h3>
+                        <p>Stay competitive by learning the most in-demand technical skills.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Remote Work</span>
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                        </div>
+                        <h3>The Complete Guide to Finding Remote Jobs</h3>
+                        <p>Everything you need to know about landing your dream remote position.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Networking</span>
+                            <span><i class="fas fa-clock"></i> 4 min read</span>
+                        </div>
+                        <h3>Building Your Professional Network Effectively</h3>
+                        <p>Learn how to connect with professionals and expand your career opportunities.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Career Tools</h2>
+                <p>Free tools to help you succeed in your job search</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Resume Builder</h3>
+                    </div>
+                    <p>Create a professional resume in minutes with our easy-to-use builder.</p>
+                    <ul class="tool-features">
+                        <li><i class="fas fa-check"></i> Professional templates</li>
+                        <li><i class="fas fa-check"></i> ATS-optimized formats</li>
+                        <li><i class="fas fa-check"></i> Download as PDF</li>
+                        <li><i class="fas fa-check"></i> Expert tips included</li>
+                    </ul>
+                    <button class="btn-tool">Start Building</button>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Salary Calculator</h3>
+                    </div>
+                    <p>Know your market value based on role, location, and experience.</p>
+                    <ul class="tool-features">
+                        <li><i class="fas fa-check"></i> Real-time salary data</li>
+                        <li><i class="fas fa-check"></i> Industry comparisons</li>
+                        <li><i class="fas fa-check"></i> Location adjustments</li>
+                        <li><i class="fas fa-check"></i> Experience levels</li>
+                    </ul>
+                    <button class="btn-tool">Calculate Now</button>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Resume Scanner</h3>
+                    </div>
+                    <p>Check if your resume passes ATS systems used by recruiters.</p>
+                    <ul class="tool-features">
+                        <li><i class="fas fa-check"></i> ATS compatibility check</li>
+                        <li><i class="fas fa-check"></i> Keyword analysis</li>
+                        <li><i class="fas fa-check"></i> Format suggestions</li>
+                        <li><i class="fas fa-check"></i> Improvement tips</li>
+                    </ul>
+                    <button class="btn-tool">Scan Resume</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Quick Career Tips</h2>
+                <p>Actionable advice you can implement today</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div class="tip-content">
+                        <h4>Tailor Your Resume for Each Application</h4>
+                        <p>Customize your resume to match the job description. Use keywords from the listing to improve your chances of getting past ATS systems.</p>
+                    </div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div class="tip-content">
+                        <h4>Research the Company Before Interviews</h4>
+                        <p>Learn about the company's mission, values, recent news, and culture. This shows genuine interest and helps you ask thoughtful questions.</p>
+                    </div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div class="tip-content">
+                        <h4>Build a Strong LinkedIn Profile</h4>
+                        <p>93% of recruiters use LinkedIn to find candidates. Make sure your profile is complete, professional, and showcases your achievements.</p>
+                    </div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <div class="tip-content">
+                        <h4>Follow Up After Every Interview</h4>
+                        <p>Send a thank-you email within 24 hours of your interview. It shows professionalism and keeps you top of mind for the hiring manager.</p>
+                    </div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">5</div>
+                    <div class="tip-content">
+                        <h4>Practice the STAR Method for Interviews</h4>
+                        <p>Structure your answers using Situation, Task, Action, and Result to give clear, compelling responses to behavioral questions.</p>
+                    </div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">6</div>
+                    <div class="tip-content">
+                        <h4>Keep Learning New Skills</h4>
+                        <p>Continuous learning keeps you competitive. Take online courses, earn certifications, and stay updated with industry trends.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Get answers to common career questions</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How long should my resume be?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>For most professionals, a one-page resume is ideal. If you have 10+ years of experience or are in academia, a two-page resume is acceptable. Focus on relevant, recent experience and quantifiable achievements.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How many jobs should I apply to per day?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Quality over quantity is key. Aim for 3-5 well-researched, tailored applications per day rather than mass applying to dozens of jobs. Each application should be customized for the specific role.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        When should I follow up after an interview?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Send a thank-you email within 24 hours of your interview. If you haven't heard back by the timeline they provided, wait 2-3 days after that date before following up politely.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I handle employment gaps on my resume?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Be honest and focus on what you did during the gap—freelance work, volunteering, skill development, caregiving, or personal projects. Frame it positively and be prepared to discuss it in interviews.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Should I include a cover letter with my application?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, if the option is available. A well-written cover letter can set you apart by showing your personality, enthusiasm, and explaining why you're a great fit for the specific role.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2>Get Career Tips in Your Inbox</h2>
+            <p>Subscribe to our newsletter for weekly career advice, job search tips, and exclusive resources.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-briefcase"></i>
+                        <span>CareerHub</span>
+                    </div>
+                    <p>Your gateway to finding the perfect career opportunity</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>For Job Seekers</h4>
+                    <ul>
+                        <li><a href="index.html">Browse Jobs</a></li>
+                        <li><a href="resources.html">Career Advice</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Salary Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Candidates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Recruitment Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@careerhub.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CareerHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing! You will receive our career tips soon.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>

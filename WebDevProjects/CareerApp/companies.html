@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Companies - CareerHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Companies Page Specific Styles */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 140px 20px 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .companies-section {
+            padding: 80px 20px;
+        }
+        
+        .search-companies {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+        
+        .search-companies input {
+            width: 100%;
+            padding: 18px 25px 18px 55px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+        
+        .search-companies input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .search-companies i {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-lighter);
+            font-size: 1.1rem;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 10px 25px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-white);
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .filter-tab:hover,
+        .filter-tab.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .company-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .company-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+        
+        .company-logo-large {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .company-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        
+        .company-card .industry {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .company-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .company-stat {
+            text-align: center;
+        }
+        
+        .company-stat .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .company-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .company-rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .company-rating i {
+            color: #fbbf24;
+        }
+        
+        .company-rating span {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .company-location {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .company-location i {
+            margin-right: 8px;
+            color: var(--text-lighter);
+        }
+        
+        .btn-view-jobs {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-view-jobs:hover {
+            background: var(--primary-dark);
+        }
+        
+        .featured-companies {
+            background: var(--bg-white);
+            padding: 80px 20px;
+        }
+        
+        .featured-companies h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+        
+        .featured-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 50px;
+            opacity: 0.7;
+        }
+        
+        .featured-logos .logo-item {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <span>CareerHub</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Find Jobs</a>
+                <a href="companies.html" class="active">Companies</a>
+                <a href="resources.html">Resources</a>
+                <a href="about.html">About</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Explore Top Companies</h1>
+        <p>Discover amazing companies hiring now and find the perfect workplace for your career</p>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="companies-section">
+        <div class="container">
+            <!-- Search -->
+            <div class="search-companies">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search companies by name or industry...">
+            </div>
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active">All Industries</button>
+                <button class="filter-tab">Technology</button>
+                <button class="filter-tab">Finance</button>
+                <button class="filter-tab">Healthcare</button>
+                <button class="filter-tab">E-commerce</button>
+                <button class="filter-tab">Consulting</button>
+            </div>
+            
+            <!-- Companies Grid -->
+            <div class="companies-grid">
+                <!-- Company Card 1 -->
+                <div class="company-card">
+                    <div class="company-logo-large">G</div>
+                    <h3>Google</h3>
+                    <p class="industry">Technology</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">156</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">180K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.5</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>Mountain View, CA</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 2 -->
+                <div class="company-card">
+                    <div class="company-logo-large">M</div>
+                    <h3>Microsoft</h3>
+                    <p class="industry">Technology</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">203</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">220K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.7</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>Redmond, WA</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 3 -->
+                <div class="company-card">
+                    <div class="company-logo-large">A</div>
+                    <h3>Amazon</h3>
+                    <p class="industry">E-commerce / Cloud</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">412</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">1.5M+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>4.0</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>Seattle, WA</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 4 -->
+                <div class="company-card">
+                    <div class="company-logo-large">M</div>
+                    <h3>Meta</h3>
+                    <p class="industry">Technology / Social Media</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">89</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">86K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.3</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>Menlo Park, CA</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 5 -->
+                <div class="company-card">
+                    <div class="company-logo-large">A</div>
+                    <h3>Apple</h3>
+                    <p class="industry">Technology / Consumer Electronics</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">134</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">164K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.8</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>Cupertino, CA</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 6 -->
+                <div class="company-card">
+                    <div class="company-logo-large">N</div>
+                    <h3>Netflix</h3>
+                    <p class="industry">Entertainment / Streaming</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">45</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">13K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.4</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>Los Gatos, CA</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 7 -->
+                <div class="company-card">
+                    <div class="company-logo-large">S</div>
+                    <h3>Salesforce</h3>
+                    <p class="industry">Technology / CRM</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">178</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">79K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.5</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>San Francisco, CA</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 8 -->
+                <div class="company-card">
+                    <div class="company-logo-large">T</div>
+                    <h3>Tesla</h3>
+                    <p class="industry">Automotive / Energy</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">267</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">127K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>4.1</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>Austin, TX</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+                
+                <!-- Company Card 9 -->
+                <div class="company-card">
+                    <div class="company-logo-large">J</div>
+                    <h3>JPMorgan Chase</h3>
+                    <p class="industry">Finance / Banking</p>
+                    <div class="company-stats">
+                        <div class="company-stat">
+                            <div class="number">324</div>
+                            <div class="label">Open Jobs</div>
+                        </div>
+                        <div class="company-stat">
+                            <div class="number">293K+</div>
+                            <div class="label">Employees</div>
+                        </div>
+                    </div>
+                    <div class="company-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>4.0</span>
+                    </div>
+                    <p class="company-location"><i class="fas fa-map-marker-alt"></i>New York, NY</p>
+                    <button class="btn-view-jobs" onclick="window.location.href='index.html'">View Jobs</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Companies -->
+    <section class="featured-companies">
+        <div class="container">
+            <h2>Trusted by Industry Leaders</h2>
+            <div class="featured-logos">
+                <span class="logo-item">Google</span>
+                <span class="logo-item">Microsoft</span>
+                <span class="logo-item">Amazon</span>
+                <span class="logo-item">Apple</span>
+                <span class="logo-item">Meta</span>
+                <span class="logo-item">Netflix</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-briefcase"></i>
+                        <span>CareerHub</span>
+                    </div>
+                    <p>Your gateway to finding the perfect career opportunity</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>For Job Seekers</h4>
+                    <ul>
+                        <li><a href="index.html">Browse Jobs</a></li>
+                        <li><a href="resources.html">Career Advice</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Salary Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Candidates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Recruitment Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@careerhub.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CareerHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
