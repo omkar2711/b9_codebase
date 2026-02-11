@@ -5,7 +5,7 @@ import {useCounter} from '../Hooks/CounterHook.jsx';
 const Comonent1 = () => {
 
 
-    const data = useRef() //
+    const data = useRef();
     const {count , increment , decrement} = useCounter();
 
     const calculationFunction = (value) => {
