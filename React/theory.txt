@@ -1,0 +1,23 @@
+react 
+    - Virtual dom
+    - JSX
+    - Components : Class based and Functional
+    - Props and State
+
+
+
+
+props :  - Props are used to pass data from one component to another component.
+  - Props are read-only.
+  - Props are immutable.
+
+state :  - State is used to manage data within a component.
+  - State is mutable.
+  - State can be changed using setState() method in class components or using useState() hook in functional components.
+
+
+Hooks :  - Hooks are functions that allow you to use state and other React features in functional components.
+  - Commonly used hooks are useState, useEffect, useContext, useReducer etc.
+
+  useState :  - useState is a hook that allows you to add state to functional components.
+  - It returns an array with two elements: the current state value and a function to update

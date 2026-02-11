@@ -1,0 +1,18 @@
+Hooks : 
+    useState
+    useEffect
+    useContext
+    useReducer
+    useRef
+    useMemo
+    useCallback
+    Custom Hooks
+
+
+useMemo and useCallback are used for performance optimization in React applications. 
+They help to prevent unnecessary re-renders and improve 
+the efficiency of your components.
+
+useRef is used to create a mutable reference that persists across re-renders.
+It can be used to access DOM elements directly or to store mutable values that do not 
+trigger re-renders when updated.
