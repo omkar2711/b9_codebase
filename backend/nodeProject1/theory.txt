@@ -1,0 +1,17 @@
+Node
+
+http : http is a built-in module in Node.js that allows you to create a web server and handle HTTP requests and responses. 
+It provides a simple and efficient way to build web applications and APIs.
+
+fs : fs (file system) is another built-in module in Node.js that allows you to interact with the file system.
+
+path : path is a built-in module in Node.js that provides utilities for working with file and directory paths. 
+It helps you manipulate and resolve file paths in a platform-independent way.
+
+os : os is a built-in module in Node.js that provides operating system-related utility methods and properties.
+It allows you to access information about the operating system, such as CPU architecture, memory usage, and network interfaces.
+
+
+1. Event Driven Architecture: Node.js is built on an event-driven architecture, which means that it uses events to handle asynchronous operations.
+2. Non-blocking I/O: Node.js uses non-blocking I/O operations, which allows it to handle multiple requests simultaneously without blocking the execution of other code.
+3. Event Loop: Node.js uses an event loop to manage and process events. The event loop continuously checks for events and executes the corresponding callbacks when events occur.
