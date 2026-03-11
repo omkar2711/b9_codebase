@@ -45,4 +45,29 @@ const registerService = async(name, email, password, role) => {
     }
 }
 
-export {loginService, registerService};
+const getProfileService = async(userId) => {
+    try{
+        const user = await User.findById(userId).select('-password');
+        if(!user){
+            throw new Error('User not found');
+        }
+        return user;
+    }
+    catch(error){
+        throw new Error(error.message);
+    }
+}
+
+
+const getAllUsersService = async() => {
+    try{
+        const users = await User.find().select('-password');
+        return users;
+    }
+    catch(error){
+        throw new Error(error.message);
+    }
+}
+
+
+export {loginService, registerService, getProfileService, getAllUsersService};
