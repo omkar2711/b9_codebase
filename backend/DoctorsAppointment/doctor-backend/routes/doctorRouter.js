@@ -13,7 +13,7 @@ const doctorRouter = Router();
 const verifyAuthenticatedUser = authorizeRoles("patient", "doctor", "admin");
 
 // GET /doctors - Get all doctors (admin only)
-doctorRouter.get("/", verifyAdmin, getAllDoctorsController);
+doctorRouter.get("/", getAllDoctorsController);
 
 // GET /doctors/:id - Get a specific doctor by ID
 doctorRouter.get("/:id", verifyAuthenticatedUser, getDoctorByIdController);

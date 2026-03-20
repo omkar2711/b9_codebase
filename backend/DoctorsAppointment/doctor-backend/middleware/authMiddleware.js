@@ -1,4 +1,6 @@
 const isNonEmptyString = (value) => typeof value === "string" && value.trim() !== "";
+const isValidPositiveNumber = (value) => typeof value === "number" && value > 0;
+const isValidNonNegativeNumber = (value) => typeof value === "number" && value >= 0;
 
 const validateLoginBody = (req, res, next) => {
 	const { email, password, role } = req.body;
@@ -7,6 +9,19 @@ const validateLoginBody = (req, res, next) => {
 		return res.status(400).json({
 			message: "Invalid request body",
 			error: "email, password, and role are required"
+		});
+	}
+
+	next();
+};
+
+const validateAdminLoginBody = (req, res, next) => {
+	const { email, password } = req.body;
+
+	if (!isNonEmptyString(email) || !isNonEmptyString(password)) {
+		return res.status(400).json({
+			message: "Invalid request body",
+			error: "email and password are required"
 		});
 	}
 
@@ -26,19 +41,10 @@ const validateRegisterBody = (req, res, next) => {
 		experience
 	} = req.body;
 
-	if (
-		!isNonEmptyString(name) ||
-		!isNonEmptyString(email) ||
-		typeof age !== "number" ||
-		age <= 0 ||
-		!isNonEmptyString(contactNumber) ||
-		!isNonEmptyString(password) ||
-		!isNonEmptyString(address) ||
-		!isNonEmptyString(role)
-	) {
+	if (!isNonEmptyString(role)) {
 		return res.status(400).json({
 			message: "Invalid request body",
-			error: "name, email, age, contactNumber, password, address, and role are required"
+			error: "role is required"
 		});
 	}
 
@@ -49,16 +55,32 @@ const validateRegisterBody = (req, res, next) => {
 		});
 	}
 
-	if (role === "doctor") {
-		if (!isNonEmptyString(specialization) || typeof experience !== "number" || experience < 0) {
-			return res.status(400).json({
-				message: "Invalid request body",
-				error: "specialization and experience are required for doctor registration"
-			});
-		}
+	if (
+		!isNonEmptyString(name) ||
+		!isNonEmptyString(email) ||
+		!isValidPositiveNumber(age) ||
+		!isNonEmptyString(contactNumber) ||
+		!isNonEmptyString(password) ||
+		!isNonEmptyString(address)
+	) {
+		return res.status(400).json({
+			message: "Invalid request body",
+			error: "name, email, age, contactNumber, password, and address are required"
+		});
+	}
+
+	if (role === "patient") {
+		return next();
+	}
+
+	if (!isNonEmptyString(specialization) || !isValidNonNegativeNumber(experience)) {
+		return res.status(400).json({
+			message: "Invalid request body",
+			error: "specialization and experience are required for doctor registration"
+		});
 	}
 
 	next();
 };
 
-export { validateLoginBody, validateRegisterBody };
+export { validateLoginBody, validateAdminLoginBody, validateRegisterBody };

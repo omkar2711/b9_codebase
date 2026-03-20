@@ -10,6 +10,17 @@ const getAllAppointmentsService = async () => {
     }
 };
 
+const getAppointmentsByDoctorIdService = async (doctorId) => {
+    try {
+        const appointments = await Appointment.find({ doctorId })
+            .populate("patientId", "name email contactNumber age")
+            .sort({ appointmentDate: 1, createdAt: -1 });
+        return appointments;
+    } catch (error) {
+        throw error;
+    }
+};
+
 const getAppointmentByIdService = async (id) => {
     try {
         const appointment = await Appointment.findById(id);
@@ -58,6 +69,7 @@ const deleteAppointmentService = async (id) => {
 
 export {
     getAllAppointmentsService,
+    getAppointmentsByDoctorIdService,
     getAppointmentByIdService,
     createAppointmentService,
     updateAppointmentService,

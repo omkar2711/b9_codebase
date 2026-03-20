@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { createAppointment } from '../../api/appointment'
 
 const AppointmnentPage = () => {
   const navigate = useNavigate()
@@ -7,11 +8,18 @@ const AppointmnentPage = () => {
 
   const fallbackDoctor = useMemo(
     () => ({
-      id: 1,
+      _id: 'demo-doctor-id',
       name: 'Dr. Aanya Sharma',
       age: 38,
       specialization: 'Cardiologist',
-      experience: '12 years',
+      experience: 12,
+      timeSlots: {
+        availableTimeSlots: [
+          { start: '9:00 AM', end: '10:00 AM' },
+          { start: '10:00 AM', end: '11:00 AM' },
+        ],
+        bookedTimeSlots: [{ start: '11:00 AM', end: '12:00 PM' }],
+      },
     }),
     []
   )
@@ -21,30 +29,100 @@ const AppointmnentPage = () => {
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedSlot, setSelectedSlot] = useState('')
   const [reason, setReason] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
 
-  const slots = [
-    '09:00 AM',
-    '09:30 AM',
-    '10:00 AM',
-    '11:30 AM',
-    '01:00 PM',
-    '03:00 PM',
-    '04:30 PM',
-    '06:00 PM',
-  ]
+  const formatSlot = (slot) => {
+    if (!slot) return ''
 
-  const handleAppointment = (event) => {
+    if (typeof slot === 'string') {
+      return slot
+    }
+
+    const start = slot.start || ''
+    const end = slot.end || ''
+    return `${start} - ${end}`.trim()
+  }
+
+  const availableSlots = Array.isArray(doctor?.timeSlots?.availableTimeSlots)
+    ? doctor.timeSlots.availableTimeSlots
+    : []
+
+  const bookedSlots = Array.isArray(doctor?.timeSlots?.bookedTimeSlots)
+    ? doctor.timeSlots.bookedTimeSlots
+    : []
+
+  const getTokenFromStorage = () => {
+    const tokenCandidates = [
+      localStorage.getItem('patientToken'),
+      localStorage.getItem('token'),
+      localStorage.getItem('doctorToken'),
+      localStorage.getItem('adminToken'),
+    ]
+
+    return tokenCandidates.find(Boolean)
+  }
+
+  const decodeUserIdFromToken = (token) => {
+    if (!token || !token.includes('.')) {
+      return null
+    }
+
+    try {
+      const base64Payload = token.split('.')[1]
+      const normalizedPayload = base64Payload.replace(/-/g, '+').replace(/_/g, '/')
+      const payloadText = window.atob(normalizedPayload)
+      const payload = JSON.parse(payloadText)
+      return payload?.id || null
+    } catch {
+      return null
+    }
+  }
+
+  const handleAppointment = async (event) => {
     event.preventDefault()
-    if (!selectedDate || !selectedSlot) return
 
-    navigate('/patient/confirmation', {
-      state: {
-        doctor,
-        date: selectedDate,
-        slot: selectedSlot,
-        reason,
-      },
-    })
+    if (!selectedDate || !selectedSlot) {
+      setError('Please select appointment date and time slot.')
+      return
+    }
+
+    const token = getTokenFromStorage()
+    const patientId = localStorage.getItem('patientId') || decodeUserIdFromToken(token)
+    const doctorId = doctor?._id || doctor?.id
+
+    if (!patientId || !doctorId) {
+      setError('Patient and doctor details are required to create appointment.')
+      return
+    }
+
+    try {
+      setIsSubmitting(true)
+      setError('')
+
+      const appointmentPayload = {
+        patientId,
+        doctorId,
+        appointmentDate: selectedDate,
+        appointmentTime: selectedSlot,
+      }
+
+      const appointmentResponse = await createAppointment(appointmentPayload, token)
+
+      navigate('/patient/confirmation', {
+        state: {
+          doctor,
+          date: selectedDate,
+          slot: selectedSlot,
+          reason,
+          appointmentResponse,
+        },
+      })
+    } catch (requestError) {
+      setError(requestError.message || 'Failed to create appointment.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -75,7 +153,10 @@ const AppointmnentPage = () => {
                 {doctor.specialization}
               </p>
               <p>
-                <span className="font-semibold text-slate-700">Experience:</span> {doctor.experience}
+                <span className="font-semibold text-slate-700">Experience:</span>{' '}
+                {typeof doctor.experience === 'number'
+                  ? `${doctor.experience} years`
+                  : doctor.experience}
               </p>
             </div>
 
@@ -104,21 +185,72 @@ const AppointmnentPage = () => {
               <div>
                 <p className="mb-2 block text-sm font-medium text-slate-700">Available Time Slots</p>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                  {slots.map((slot) => {
-                    const active = selectedSlot === slot
+                  {availableSlots.length === 0 && (
+                    <p className="col-span-full rounded-xl border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-600">
+                      No available slots configured for this doctor.
+                    </p>
+                  )}
+
+                  {availableSlots.map((slot) => {
+                    const slotLabel = formatSlot(slot)
+                    const active = selectedSlot === slotLabel
                     return (
                       <button
-                        key={slot}
+                        key={slotLabel}
                         type="button"
-                        onClick={() => setSelectedSlot(slot)}
-                        className={`rounded-xl px-3 py-2 text-sm font-semibold transition ${
+                        onClick={() => {
+                          setSelectedSlot(slotLabel)
+                          setError('')
+                        }}
+                        className={`rounded-xl px-3 py-2 text-sm font-semibold transition-all duration-200 ${
                           active
-                            ? 'bg-teal-600 text-white'
+                            ? 'scale-[1.03] border border-teal-700 bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg shadow-teal-700/25 ring-2 ring-teal-200'
                             : 'border border-slate-300 bg-white text-slate-700 hover:border-teal-400 hover:text-teal-700'
                         }`}
                       >
-                        {slot}
+                        <span className="inline-flex items-center gap-1.5">
+                          {active ? <span className="text-xs">✓</span> : null}
+                          {slotLabel}
+                        </span>
                       </button>
+                    )
+                  })}
+                </div>
+
+                <div
+                  className={`mt-3 overflow-hidden rounded-xl border px-3 py-2 text-sm transition-all duration-200 ${
+                    selectedSlot
+                      ? 'max-h-24 border-emerald-200 bg-emerald-50 text-emerald-800'
+                      : 'max-h-0 border-transparent bg-transparent px-0 py-0 text-transparent'
+                  }`}
+                >
+                  {selectedSlot ? (
+                    <p>
+                      Selected slot: <span className="font-semibold">{selectedSlot}</span>
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2 block text-sm font-medium text-slate-700">Booked Time Slots</p>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {bookedSlots.length === 0 && (
+                    <p className="col-span-full rounded-xl border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-600">
+                      No booked slots yet.
+                    </p>
+                  )}
+
+                  {bookedSlots.map((slot) => {
+                    const slotLabel = formatSlot(slot)
+
+                    return (
+                      <span
+                        key={slotLabel}
+                        className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-center text-sm font-semibold text-rose-700"
+                      >
+                        {slotLabel}
+                      </span>
                     )
                   })}
                 </div>
@@ -138,12 +270,18 @@ const AppointmnentPage = () => {
                 />
               </div>
 
+              {error ? (
+                <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+                  {error}
+                </p>
+              ) : null}
+
               <button
                 type="submit"
-                disabled={!selectedDate || !selectedSlot}
+                disabled={!selectedDate || !selectedSlot || isSubmitting}
                 className="w-full rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 px-4 py-2.5 font-semibold text-white shadow-lg shadow-teal-700/25 transition hover:from-teal-700 hover:to-teal-800 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Confirm Appointment
+                {isSubmitting ? 'Creating Appointment...' : 'Confirm Appointment'}
               </button>
             </form>
           </article>

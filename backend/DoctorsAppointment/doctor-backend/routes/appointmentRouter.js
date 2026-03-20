@@ -1,6 +1,7 @@
 import {Router} from "express";
 import {
 	getAllAppointmentsController,
+	getAppointmentsByDoctorIdController,
 	getAppointmentByIdController,
 	createAppointmentController,
 	updateAppointmentController,
@@ -14,9 +15,13 @@ import {
 
 const appointmentRouter = Router();
 const verifyAuthenticatedUser = authorizeRoles("patient", "doctor", "admin");
+const verifyDoctorOrAdmin = authorizeRoles("doctor", "admin");
 
 // GET /appointments - Get all appointments (admin only)
 appointmentRouter.get("/", verifyAdmin, getAllAppointmentsController);
+
+// GET /appointments/doctor/:doctorId - Get all appointments for a specific doctor (doctor/admin)
+appointmentRouter.get("/doctor/:doctorId", verifyDoctorOrAdmin, getAppointmentsByDoctorIdController);
 
 // GET /appointments/:id - Get a specific appointment by ID
 appointmentRouter.get("/:id", verifyAuthenticatedUser, getAppointmentByIdController);

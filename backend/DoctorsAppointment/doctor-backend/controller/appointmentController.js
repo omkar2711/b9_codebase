@@ -1,5 +1,6 @@
 import {
 	getAllAppointmentsService,
+	getAppointmentsByDoctorIdService,
 	getAppointmentByIdService,
 	createAppointmentService,
 	updateAppointmentService,
@@ -12,6 +13,24 @@ const getAllAppointmentsController = async (req, res) => {
 		res.status(200).json(appointments);
 	} catch (error) {
 		res.status(500).json({ message: "Failed to fetch appointments", error: error.message });
+	}
+};
+
+const getAppointmentsByDoctorIdController = async (req, res) => {
+	try {
+		const { doctorId } = req.params;
+
+		if (req.user.role === "doctor" && req.user.id !== doctorId) {
+			return res.status(403).json({
+				message: "Authorization failed",
+				error: "Doctors can only view their own appointments",
+			});
+		}
+
+		const appointments = await getAppointmentsByDoctorIdService(doctorId);
+		res.status(200).json(appointments);
+	} catch (error) {
+		res.status(500).json({ message: "Failed to fetch doctor appointments", error: error.message });
 	}
 };
 
@@ -64,6 +83,7 @@ const deleteAppointmentController = async (req, res) => {
 
 export {
 	getAllAppointmentsController,
+	getAppointmentsByDoctorIdController,
 	getAppointmentByIdController,
 	createAppointmentController,
 	updateAppointmentController,

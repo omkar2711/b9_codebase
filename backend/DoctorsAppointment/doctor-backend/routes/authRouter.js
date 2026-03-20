@@ -1,6 +1,6 @@
 import {Router} from "express";
-import { loginController, regsiterController } from "../controller/authController.js";
-import { validateLoginBody, validateRegisterBody } from "../middleware/authMiddleware.js";
+import { adminLoginController, loginController, regsiterController } from "../controller/authController.js";
+import { validateAdminLoginBody, validateLoginBody, validateRegisterBody } from "../middleware/authMiddleware.js";
 
 const authRouter = Router();
 
@@ -9,5 +9,8 @@ authRouter.post("/register", validateRegisterBody, regsiterController);
 
 // POST /auth/login - Login a user and return a JWT token
 authRouter.post("/login", validateLoginBody, loginController );
+
+// POST /auth/admin/login - Admin login with email and password
+authRouter.post("/admin/login", validateAdminLoginBody, adminLoginController);
 
 export default authRouter;

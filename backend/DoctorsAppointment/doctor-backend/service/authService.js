@@ -77,10 +77,60 @@ const loginService = async (email, password, role) => {
         // Generate JWT token
         const token = jwt.sign({ id: user._id, role }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-        return { message: "User logged in successfully", token };
+        const userId = user._id.toString();
+        const response = {
+            message: "User logged in successfully",
+            token,
+            role,
+            userId,
+        };
+
+        if (role === "doctor") {
+            response.doctorId = userId;
+        } else if (role === "patient") {
+            response.patientId = userId;
+        } else if (role === "admin") {
+            response.adminId = userId;
+        }
+
+        return response;
     } catch (error) {
         throw error;
     }
 };
 
-export { registerPatientService, registerDoctorService, loginService };
+const adminLoginService = async (email, password) => {
+    try {
+        const user = await Admin.findOne({ email });
+
+       
+
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        // const isMatch = await bcrypt.compare(password, user.password);
+        if(password !== user.password) {
+            throw new Error("Invalid credentials");
+        }
+        // if (!isMatch) {
+        // //     throw new Error("Invalid credentials");
+        // }
+
+        const role = "admin";
+        const token = jwt.sign({ id: user._id, role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const userId = user._id.toString();
+
+        return {
+            message: "User logged in successfully",
+            token,
+            role,
+            userId,
+            adminId: userId,
+        };
+    } catch (error) {
+        throw error;
+    }
+};
+
+export { registerPatientService, registerDoctorService, loginService, adminLoginService };

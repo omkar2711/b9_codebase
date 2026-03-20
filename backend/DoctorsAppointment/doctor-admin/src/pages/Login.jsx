@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { adminLogin } from '../api/api'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -9,8 +10,6 @@ const Login = () => {
   })
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
-
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
@@ -31,31 +30,22 @@ const Login = () => {
 
     try {
       setSubmitting(true)
-      const response = await fetch(`${baseUrl}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-          role: 'admin',
-        }),
+      const payload = await adminLogin({
+        email: formData.email,
+        password: formData.password,
       })
-
-      const payload = await response.json().catch(() => ({}))
-
-      if (!response.ok) {
-        throw new Error(payload.message || 'Admin login failed.')
-      }
 
       if (payload.token) {
         localStorage.setItem('adminToken', payload.token)
       }
       localStorage.setItem('adminEmail', formData.email)
+      if (payload.adminId) {
+        localStorage.setItem('adminId', payload.adminId)
+      }
       navigate('/dashboard')
     } catch (requestError) {
-      setError(requestError.message || 'Unable to login at the moment.')
+      const apiMessage = requestError?.response?.data?.message
+      setError(apiMessage || requestError.message || 'Unable to login at the moment.')
     } finally {
       setSubmitting(false)
     }
