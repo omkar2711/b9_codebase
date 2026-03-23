@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 const initialFormState = {
   name: '',
@@ -28,12 +28,11 @@ const AddUserModal = ({
   const [formData, setFormData] = useState(initialFormState)
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    if (isOpen) {
-      setFormData(initialFormState)
-      setError('')
-    }
-  }, [isOpen, type])
+  const handleClose = () => {
+    setFormData(initialFormState)
+    setError('')
+    onClose()
+  }
 
   if (!isOpen) {
     return null
@@ -104,7 +103,7 @@ const AddUserModal = ({
           <h2 className="text-xl font-bold text-slate-900">{modalTitle}</h2>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="rounded-lg border border-slate-300 bg-white px-3 py-1 text-sm font-semibold text-slate-700"
           >
             Close
@@ -264,7 +263,7 @@ const AddUserModal = ({
           <div className="flex justify-end gap-2">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className="rounded-xl border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-700"
             >
               Cancel

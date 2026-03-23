@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000; //defining the port number
 
 dbConnect(); //connecting to the database
 
-app.use(cors({ origin: "*" })); //enabling CORS for all origins
+app.use(cors({ origin: process.env.FRONTEND_URL })); //enabling CORS for the frontend URL
 
 app.use(express.json()); //middleware to parse JSON bodies
 

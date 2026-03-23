@@ -217,6 +217,7 @@ const Dashbaord = () => {
       </div>
 
       <AddUserModal
+        key={`${modalType}-${isModalOpen}`}
         isOpen={isModalOpen}
         type={modalType}
         onClose={() => setIsModalOpen(false)}
